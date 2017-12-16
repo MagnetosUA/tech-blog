@@ -11,13 +11,13 @@ class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user->setName('User'.$i);
             $user->setPassword(123+$i);
             $manager->persist($user);
         }
-
         $manager->flush();
+        $this->addReference('user', $user);
     }
 }

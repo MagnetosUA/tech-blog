@@ -13,8 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Category
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,14 +20,12 @@ class Category
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="categories")
      */
     private $post;
 
@@ -40,7 +36,6 @@ class Category
     {
         $this->post = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -98,29 +93,5 @@ class Category
     public function getPost()
     {
         return $this->post;
-    }
-
-    /**
-     * Add post
-     *
-     * @param \MagnetosCompany\BlogBundle\Entity\Post $post
-     *
-     * @return Category
-     */
-    public function addPost(\MagnetosCompany\BlogBundle\Entity\Post $post)
-    {
-        $this->post[] = $post;
-
-        return $this;
-    }
-
-    /**
-     * Remove post
-     *
-     * @param \MagnetosCompany\BlogBundle\Entity\Post $post
-     */
-    public function removePost(\MagnetosCompany\BlogBundle\Entity\Post $post)
-    {
-        $this->post->removeElement($post);
     }
 }

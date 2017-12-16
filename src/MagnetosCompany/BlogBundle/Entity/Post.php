@@ -13,8 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Post
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,22 +20,16 @@ class Post
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255, unique=true)
      */
     private $title;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="article", type="text")
      */
     private $article;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
@@ -46,27 +38,28 @@ class Post
      * @ORM\ManyToOne(targetEntity="User", inversedBy="post")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user;
+    private $users;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="post")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    private $category;
+    private $categories;
 
     /**
      * Many Tags have Many Posts.
-     * @ORM\ManyToMany(targetEntity="Tag", mappedBy="post")
+     * @ORM\ManyToMany(targetEntity="Tag")
+     * @ORM\JoinTable(name="post_tags", joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")})
      */
-    private $post;
+    private $tags;
 
     /**
      * Tag constructor.
      */
     public function __construct() {
-        $this->post = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    private  $tag;
 
     /**
      * Get id
@@ -151,84 +144,67 @@ class Post
     }
 
     /**
-     * Set user
+     * Set users
      *
-     * @param string $user
+     * @param \MagnetosCompany\BlogBundle\Entity\User $users
      *
      * @return Post
      */
-    public function setUser($user)
+    public function setUsers(\MagnetosCompany\BlogBundle\Entity\User $users = null)
     {
-        $this->user = $user;
+        $this->users = $users;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get users
      *
-     * @return string
+     * @return \MagnetosCompany\BlogBundle\Entity\User
      */
-    public function getUser()
+    public function getUsers()
     {
-        return $this->user;
+        return $this->users;
     }
 
     /**
-     * Set category
+     * Set categories
      *
-     * @param \MagnetosCompany\BlogBundle\Entity\Category $category
+     * @param \MagnetosCompany\BlogBundle\Entity\Category $categories
      *
      * @return Post
      */
-    public function setCategory(\MagnetosCompany\BlogBundle\Entity\Category $category = null)
+    public function setCategories(\MagnetosCompany\BlogBundle\Entity\Category $categories = null)
     {
-        $this->category = $category;
+        $this->categories = $categories;
 
         return $this;
     }
 
     /**
-     * Get category
+     * @return mixed
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param mixed $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags[] = $tags;
+    }
+
+
+    /**
+     * Get categories
      *
      * @return \MagnetosCompany\BlogBundle\Entity\Category
      */
-    public function getCategory()
+    public function getCategories()
     {
-        return $this->category;
-    }
-
-    /**
-     * Add post
-     *
-     * @param \MagnetosCompany\BlogBundle\Entity\Tag $post
-     *
-     * @return Post
-     */
-    public function addPost(\MagnetosCompany\BlogBundle\Entity\Tag $post)
-    {
-        $this->post[] = $post;
-
-        return $this;
-    }
-
-    /**
-     * Remove post
-     *
-     * @param \MagnetosCompany\BlogBundle\Entity\Tag $post
-     */
-    public function removePost(\MagnetosCompany\BlogBundle\Entity\Tag $post)
-    {
-        $this->post->removeElement($post);
-    }
-
-    /**
-     * Get post
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPost()
-    {
-        return $this->post;
+        return $this->categories;
     }
 }
