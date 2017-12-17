@@ -19,7 +19,6 @@ class PostFixtures extends Fixture
             $post = new Post();
             $post->setTitle('title '.$i);
             $post->setArticle('New article.....'.$i);
-            $post->setCreated(date_create());
             $post->setUsers($user);
             $post->setCategories($category);
             $post->setTags($tag);

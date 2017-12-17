@@ -2,6 +2,8 @@
 
 namespace MagnetosCompany\BlogBundle\Repository;
 
+use MagnetosCompany\BlogBundle\Repository\PostRepository;
+
 /**
  * UserRepository
  *
@@ -10,4 +12,13 @@ namespace MagnetosCompany\BlogBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getUserByName($userName)
+    {
+        $query = $this->createQueryBuilder('u')
+            ->where('u.name = :name')
+            ->setParameter('name', $userName)
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }

@@ -126,9 +126,9 @@ class Post
      *
      * @return Post
      */
-    public function setCreated($created)
+    public function setCreated()
     {
-        $this->created = $created;
+        $this->created = date_create();
 
         return $this;
     }

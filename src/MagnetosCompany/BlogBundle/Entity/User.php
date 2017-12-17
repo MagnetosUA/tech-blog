@@ -129,8 +129,8 @@ class User
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPost()
+    public function getPost($id)
     {
-        return $this->post;
+        return $this->post[$id];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace MagnetosCompany\BlogBundle\Repository;
 
+use MagnetosCompany\BlogBundle\Entity\Tag;
+
 /**
  * PostRepository
  *
@@ -10,4 +12,13 @@ namespace MagnetosCompany\BlogBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByLastId()
+    {
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
