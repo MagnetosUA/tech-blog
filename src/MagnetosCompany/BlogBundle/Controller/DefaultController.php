@@ -2,24 +2,38 @@
 
 namespace MagnetosCompany\BlogBundle\Controller;
 
-use MagnetosCompany\BlogBundle\Entity\Category;
 use MagnetosCompany\BlogBundle\Entity\User;
-use MagnetosCompany\BlogBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
+use MagnetosCompany\BlogBundle\Form\Type\UserType;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user= $this->getDoctrine()->getRepository(User::class)->getUserByName('User0');
-        $post = $this->getDoctrine()->getRepository(Post::class)->findByLastId();
+        $user= new User();
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $task = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+
+            return $this->redirectToRoute('task_success');
+        }
 
         return $this->render('@Blog/Default/index.html.twig', [
-            'user' => $user,
-            'post' => $post,
+            'form' => $form->createView(),
         ]);
+    }
+
+    public function successAction()
+    {
+        return $this->render('@Blog/Default/success.html.twig');
     }
 }

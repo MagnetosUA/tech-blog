@@ -2,3 +2,7 @@ blog_homepage:
     path:     /
     defaults: { _controller: BlogBundle:Default:index }
 
+task_success:
+    path:     /success
+    defaults: { _controller: BlogBundle:Default:success}
+

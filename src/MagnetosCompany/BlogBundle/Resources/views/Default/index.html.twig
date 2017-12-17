@@ -1,12 +1,6 @@
 Hello World!
-{% for u in user %}
-    {{ u.getPassword }}
-    <hr>
-{% endfor %}
 
-{% for p in post%}
-    {{ p.title }}
-    <hr>
-    {{ p.article }}
-{% endfor %}
 
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}

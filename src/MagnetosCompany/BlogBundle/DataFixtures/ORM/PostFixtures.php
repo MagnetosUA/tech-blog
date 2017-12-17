@@ -22,6 +22,7 @@ class PostFixtures extends Fixture
             $post->setUsers($user);
             $post->setCategories($category);
             $post->setTags($tag);
+            $post->setCreated();
             $manager->persist($post);
         }
 

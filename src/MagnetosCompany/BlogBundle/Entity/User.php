@@ -3,6 +3,7 @@
 namespace MagnetosCompany\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -21,13 +22,32 @@ class User
 
     /**
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * * @Assert\Length(
+     *      min = 2,
+     *      max = 10,
+     *      minMessage = "Your first name must be at least 2 characters long",
+     *      maxMessage = "Your first name cannot be longer than 10 characters"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      */
     private $password;
+
+    /**
+     * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
+     */
+    private $email;
 
     /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="users")
@@ -59,6 +79,15 @@ class User
      *
      * @return User
      */
+
+    /**
+     * @Assert\IsTrue(message="The password cannot match your first name")
+     */
+    public function isPasswordLegal()
+    {
+        return $this->name !== $this->password;
+    }
+
     public function setName($name)
     {
         $this->name = $name;
@@ -133,4 +162,21 @@ class User
     {
         return $this->post[$id];
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
 }
