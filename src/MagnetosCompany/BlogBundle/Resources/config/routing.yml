@@ -2,6 +2,18 @@ blog_homepage:
     path:     /
     defaults: { _controller: BlogBundle:Default:index }
 
+blog_exp:
+    path:     /exp
+    defaults: { _controller: BlogBundle:Default:exp }
+
+blog_add_user:
+    path:     /add_user
+    defaults: { _controller: BlogBundle:Default:addUser }
+
+blog_add_post:
+    path:     /add_post
+    defaults: { _controller: BlogBundle:Default:addPost }
+
 task_success:
     path:     /success
     defaults: { _controller: BlogBundle:Default:success}

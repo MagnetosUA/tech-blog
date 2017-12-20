@@ -50,7 +50,7 @@ class User
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="users", orphanRemoval=true)
      */
     private $post;
 

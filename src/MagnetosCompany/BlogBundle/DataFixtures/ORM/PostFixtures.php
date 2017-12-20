@@ -19,6 +19,7 @@ class PostFixtures extends Fixture
             $post = new Post();
             $post->setTitle('title '.$i);
             $post->setArticle('New article.....'.$i);
+            $post->setLinkToImage('https://static.pexels.com/photos/15286/pexels-photo.jpg');
             $post->setUsers($user);
             $post->setCategories($category);
             $post->setTags($tag);

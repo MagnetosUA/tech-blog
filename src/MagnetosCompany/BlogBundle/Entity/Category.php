@@ -25,7 +25,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="categories", orphanRemoval=true)
      */
     private $post;
 

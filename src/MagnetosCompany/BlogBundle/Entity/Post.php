@@ -35,6 +35,11 @@ class Post
     private $created;
 
     /**
+     * @ORM\Column(name="link_to_image", type="string", length=255)
+     */
+    private $linkToImage;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="post")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -59,6 +64,7 @@ class Post
      */
     public function __construct() {
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->created = date_create();
     }
 
     /**
@@ -93,6 +99,22 @@ class Post
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLinkToImage()
+    {
+        return $this->linkToImage;
+    }
+
+    /**
+     * @param mixed $linkToImage
+     */
+    public function setLinkToImage($linkToImage)
+    {
+        $this->linkToImage = $linkToImage;
     }
 
     /**
