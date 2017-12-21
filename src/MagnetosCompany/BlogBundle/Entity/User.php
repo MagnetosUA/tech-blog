@@ -4,6 +4,7 @@ namespace MagnetosCompany\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="MagnetosCompany\BlogBundle\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(name="id", type="integer")
@@ -50,6 +51,11 @@ class User
     private $email;
 
     /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="users", orphanRemoval=true)
      */
     private $post;
@@ -60,6 +66,7 @@ class User
     public function __construct()
     {
         $this->post = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isActive = true;
     }
 
     /**
@@ -70,6 +77,31 @@ class User
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->name,
+            $this->password,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->name,
+            $this->password,
+        ) = unserialize($serialized);
     }
 
     /**
@@ -100,9 +132,18 @@ class User
      *
      * @return string
      */
-    public function getName()
+    public function getUsername()
     {
         return $this->name;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
     }
 
     /**

@@ -2,6 +2,10 @@ blog_homepage:
     path:     /
     defaults: { _controller: BlogBundle:Default:index }
 
+blog_admin:
+    path:     /admin
+    defaults: { _controller: BlogBundle:Default:admin }
+
 blog_exp:
     path:     /exp
     defaults: { _controller: BlogBundle:Default:exp }
