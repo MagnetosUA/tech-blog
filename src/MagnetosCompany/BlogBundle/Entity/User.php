@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="MagnetosCompany\BlogBundle\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
     /**
      * @ORM\Column(name="id", type="integer")
@@ -39,6 +39,11 @@ class User implements UserInterface, \Serializable
      * @Assert\NotNull()
      */
     private $password;
+
+    /**
+     * @var string
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(name="email", type="string", length=255)
@@ -81,27 +86,7 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
-    }
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->name,
-            $this->password,
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->name,
-            $this->password,
-        ) = unserialize($serialized);
+        return ['ROLE_USER'];
     }
 
     /**
@@ -134,7 +119,7 @@ class User implements UserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->name;
+        return $this->email;
     }
 
     public function getSalt()
@@ -144,6 +129,7 @@ class User implements UserInterface, \Serializable
 
     public function eraseCredentials()
     {
+        $this->plainPassword = null;
     }
 
     /**
@@ -157,7 +143,6 @@ class User implements UserInterface, \Serializable
     {
         $this->password = $password;
 
-        return $this;
     }
 
     /**
@@ -219,5 +204,24 @@ class User implements UserInterface, \Serializable
     {
         $this->email = $email;
     }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        $this->password = null;
+    }
+
+
 
 }

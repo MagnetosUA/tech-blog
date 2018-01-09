@@ -6,6 +6,15 @@ blog_admin:
     path:     /admin
     defaults: { _controller: BlogBundle:Default:admin }
 
+blog_login:
+    path:     /login
+    defaults: { _controller: BlogBundle:Security:login }
+
+blog_logout:
+    path:     /logout
+    defaults: { _controller: BlogBundle:Security:logout }
+
+
 blog_exp:
     path:     /exp
     defaults: { _controller: BlogBundle:Default:exp }

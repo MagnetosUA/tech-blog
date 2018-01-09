@@ -1,6 +1,12 @@
-Hello World!
+{% extends '@Blog/base.html.twig' %}
 
 
-{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+{% block content_column %}
+
+    Hello World!
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}

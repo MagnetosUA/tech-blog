@@ -1,25 +1,9 @@
 {% extends '@Blog/base.html.twig' %}
-{% block menu %}
-    <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-            <span class="sr-only">(current)</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('blog_add_user') }}">Add User</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('blog_add_post') }}">Add Post</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
-    </li>
-{% endblock menu %}
-
 
     {% block content_column %}
         <!-- Post Content Column -->
-        <div class="col-lg-8">
+
+        <div class="col-lg-8" style="margin-top: 50px;">
 
             <!-- Title -->
             <h1 class="mt-4">{{ post.title }}</h1>
