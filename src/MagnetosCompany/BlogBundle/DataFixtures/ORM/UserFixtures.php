@@ -11,12 +11,14 @@ class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 1; $i++) {
+        $roles = [['ROLE_ADMIN',], ['ROLE_USER',],];
+        for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user->setName('User'.$i);
             $user->setPassword(123+$i);
             $user->setEmail("myemail@coma.su".$i);
             $user->setPlainPassword('123');
+            $user->setRoles($roles[array_rand($roles, 1)]);
             $manager->persist($user);
         }
         $manager->flush();
