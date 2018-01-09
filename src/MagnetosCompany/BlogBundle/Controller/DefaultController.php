@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use MagnetosCompany\BlogBundle\Form\Type\UserType;
 use MagnetosCompany\BlogBundle\Form\Type\PostType;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DefaultController extends Controller
 {
@@ -50,6 +51,11 @@ class DefaultController extends Controller
         return $this->render('@Blog/Default/success.html.twig');
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Security("is_granted('ROLE_USER')")
+     */
     public function addPostAction(Request $request)
     {
         $post = new Post();
