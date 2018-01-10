@@ -19,9 +19,9 @@ blog_exp:
     path:     /exp
     defaults: { _controller: BlogBundle:Default:exp }
 
-blog_add_user:
-    path:     /add_user
-    defaults: { _controller: BlogBundle:Default:addUser }
+blog_register:
+    path:     /register
+    defaults: { _controller: BlogBundle:User:register }
 
 blog_add_post:
     path:     /add_post
