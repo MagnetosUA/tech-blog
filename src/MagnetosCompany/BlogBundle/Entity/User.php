@@ -3,6 +3,7 @@
 namespace MagnetosCompany\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -11,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="MagnetosCompany\BlogBundle\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="It looks like your already have an account!")
  */
 class User implements UserInterface
 {
@@ -35,8 +37,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
      */
     private $password;
 
@@ -66,6 +66,11 @@ class User implements UserInterface
     private $post;
 
     /**
+     * @ORM\Column(type="json_array")
+     */
+    private $roles = [];
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -86,7 +91,17 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+
+//        if (!in_array('ROLE_USER', $roles)) {
+//            $roles[] = 'ROLE_USER';
+//        }
+        return $roles;
+    }
+
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -120,6 +135,14 @@ class User implements UserInterface
     public function getUsername()
     {
         return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function getSalt()

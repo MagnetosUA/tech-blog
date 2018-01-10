@@ -17,7 +17,7 @@ class UserFixtures extends Fixture
             $user->setName('User'.$i);
             $user->setPassword(123+$i);
             $user->setEmail("myemail@coma.su".$i);
-            $user->setPlainPassword('123');
+            $user->setPlainPassword(123+$i);
             $user->setRoles($roles[array_rand($roles, 1)]);
             $manager->persist($user);
         }

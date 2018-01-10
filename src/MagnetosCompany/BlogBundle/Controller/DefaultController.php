@@ -12,17 +12,34 @@ use MagnetosCompany\BlogBundle\Form\Type\PostType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+
+/**
+ * Class DefaultController
+ * @package MagnetosCompany\BlogBundle\Controller
+ *
+ *
+ */
 class DefaultController extends Controller
 {
 
+    /**
+     * @return Response
+     * @Security("is_granted('ROLE_USER')")
+     */
     public function indexAction()
     {
-        $post = $this->getDoctrine()->getRepository(Post::class)->find(29);
+        $post = $this->getDoctrine()->getRepository(Post::class)->findAll();
+
         return $this->render('@Blog/Page/home.html.twig', [
             'post' => $post,
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
+     */
     public function addUserAction(Request $request)
     {
         $user= new User();
@@ -54,7 +71,8 @@ class DefaultController extends Controller
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     * @Security("is_granted('ROLE_USER')")
+     *
+     * @Security("is_granted('ROLE_SU')")
      */
     public function addPostAction(Request $request)
     {
@@ -79,15 +97,26 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @return Response
+     *
+     * @Security("is_granted('ROLE_USER')")
+     */
     public function expAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $category = $this->getDoctrine()->getRepository(Category::class)->find(22);
-        $em->remove($category);
-        $em->flush();
-        return $this->render('@Blog/Default/exp.html.twig');
+        $roles = [['ROLE_ADMIN',], ['ROLE_USER',],];
+        $r = array_rand($roles, 1);
+        print_r($roles[$r]);
+
+        return new Response('<html><body>exp</body></html>');
+
     }
 
+    /**
+     * @return Response
+     *
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function adminAction()
     {
         return new Response('<html><body>Admin page!</body></html>');
