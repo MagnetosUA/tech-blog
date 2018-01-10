@@ -34,9 +34,9 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
         $post, /* query NOT result */
         $request->query->getInt('page', 1)/*page number*/,
-        10/*limit per page*/
+        1/*limit per page*/
     );
-
+        //var_dump($pagination);
         return $this->render('@Blog/Page/home.html.twig', [
             'post' => $post,
             'pagination' => $pagination,

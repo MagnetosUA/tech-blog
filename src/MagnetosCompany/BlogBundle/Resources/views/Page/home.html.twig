@@ -12,9 +12,14 @@
             <div class="count">
                 {{ pagination.getTotalItemCount }}
             </div>
+            <table>
+
+            </table>
+            {# display navigation #}
+
             <!-- Title -->
-            {% for p in post %}
-            <h1 class="mt-4">{{ p.title }}</h1>
+            {% for article in pagination %}
+            <h1 class="mt-4">{{ article.title }}</h1>
 
             <!-- Author -->
             <p class="lead">
@@ -25,22 +30,25 @@
             <hr>
 
             <!-- Date/Time -->
-            <p>{{ p.created|date }}</p>
+            <p>{{ article.created|date }}</p>
 
             <hr>
 
             <!-- Preview Image -->
-            <img class="img-fluid rounded" src="{{ p.linkToImage }}" alt="">
+            <img class="img-fluid rounded" src="{{ article.linkToImage }}" alt="">
 
             <hr>
 
             <!-- Post Content -->
             <p class="lead">
-                {{ p.article }}
+                {{ article.article }}
             </p>
 
             <hr>
             {% endfor %}
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
             <!-- Comments Form -->
             <div class="card my-4">
                 <h5 class="card-header">Leave a Comment:</h5>
