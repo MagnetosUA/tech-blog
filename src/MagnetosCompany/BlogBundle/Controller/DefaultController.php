@@ -26,12 +26,20 @@ class DefaultController extends Controller
      * @return Response
      * @Security("is_granted('ROLE_USER')")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->findAll();
 
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+        $post, /* query NOT result */
+        $request->query->getInt('page', 1)/*page number*/,
+        10/*limit per page*/
+    );
+
         return $this->render('@Blog/Page/home.html.twig', [
             'post' => $post,
+            'pagination' => $pagination,
         ]);
     }
 

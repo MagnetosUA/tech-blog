@@ -9,6 +9,9 @@
             Welcome
             {{ app.user ? app.user.name : 'Aquanauts' }}!
         </h1>
+            <div class="count">
+                {{ pagination.getTotalItemCount }}
+            </div>
             <!-- Title -->
             {% for p in post %}
             <h1 class="mt-4">{{ p.title }}</h1>
