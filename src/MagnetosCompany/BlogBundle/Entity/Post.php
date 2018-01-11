@@ -3,6 +3,7 @@
 namespace MagnetosCompany\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Post
@@ -31,6 +32,7 @@ class Post
 
     /**
      * @ORM\Column(name="created", type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $created;
 

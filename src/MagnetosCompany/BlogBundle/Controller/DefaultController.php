@@ -30,6 +30,9 @@ class DefaultController extends Controller
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->findAll();
 
+        //$breadcrumbs = $this->get("white_october_breadcrumbs");
+        //$breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
+
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
         $post, /* query NOT result */
@@ -80,7 +83,7 @@ class DefaultController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      *
-     * @Security("is_granted('ROLE_SU')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function addPostAction(Request $request)
     {
