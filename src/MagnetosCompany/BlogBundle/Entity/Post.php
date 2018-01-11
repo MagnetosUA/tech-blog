@@ -37,6 +37,12 @@ class Post
     private $created;
 
     /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(name="link_to_image", type="string", length=255)
      */
     private $linkToImage;
@@ -191,6 +197,10 @@ class Post
         return $this->users;
     }
 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
     /**
      * Set categories
      *
