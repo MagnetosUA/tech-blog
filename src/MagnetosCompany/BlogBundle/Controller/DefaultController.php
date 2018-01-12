@@ -3,6 +3,7 @@
 namespace MagnetosCompany\BlogBundle\Controller;
 
 use MagnetosCompany\BlogBundle\Entity\Category;
+use MagnetosCompany\BlogBundle\Entity\Tag;
 use MagnetosCompany\BlogBundle\Entity\User;
 use MagnetosCompany\BlogBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,7 +30,8 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->findAll();
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
 
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
@@ -44,7 +46,8 @@ class DefaultController extends Controller
         return $this->render('@Blog/Page/home.html.twig', [
             'post' => $post,
             'pagination' => $pagination,
-            'categories' => $categories,
+            'categories' => $category,
+            'tags' => $tag,
         ]);
     }
 
