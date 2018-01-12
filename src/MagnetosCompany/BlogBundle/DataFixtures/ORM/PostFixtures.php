@@ -11,11 +11,10 @@ class PostFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $user = $this->getReference('user');
-        $category = $this->getReference('category');
-        $tag = $this->getReference('tag');
-
         for ($i = 0; $i < 5; $i++) {
+            $user = $this->getReference('user'.$i);
+            $category = $this->getReference('category'.$i);
+            $tag = $this->getReference('tag'.$i);
             $post = new Post();
             $post->setTitle('title '.$i);
             $post->setArticle('New article.....'.$i);

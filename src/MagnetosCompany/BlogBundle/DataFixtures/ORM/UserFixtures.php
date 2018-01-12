@@ -20,8 +20,9 @@ class UserFixtures extends Fixture
             $user->setPlainPassword(123+$i);
             $user->setRoles($roles[array_rand($roles, 1)]);
             $manager->persist($user);
+            $this->addReference('user'.$i, $user);
         }
         $manager->flush();
-        $this->addReference('user', $user);
+
     }
 }
