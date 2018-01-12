@@ -29,6 +29,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->findAll();
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
@@ -43,6 +44,7 @@ class DefaultController extends Controller
         return $this->render('@Blog/Page/home.html.twig', [
             'post' => $post,
             'pagination' => $pagination,
+            'categories' => $categories,
         ]);
     }
 
