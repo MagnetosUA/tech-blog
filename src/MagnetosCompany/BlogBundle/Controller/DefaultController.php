@@ -30,8 +30,8 @@ class DefaultController extends Controller
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->findAll();
 
-        //$breadcrumbs = $this->get("white_october_breadcrumbs");
-        //$breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -44,39 +44,6 @@ class DefaultController extends Controller
             'post' => $post,
             'pagination' => $pagination,
         ]);
-    }
-
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     *
-     */
-    public function addUserAction(Request $request)
-    {
-        $user= new User();
-        $form = $this->createForm(UserType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $user = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('task_success');
-        }
-
-        return $this->render('@Blog/Default/index.html.twig', [
-            'form' => $form->createView(),
-            'who_is_it' => 'user',
-        ]);
-    }
-
-    public function successAction()
-    {
-        return $this->render('@Blog/Default/success.html.twig');
     }
 
     /**
@@ -99,7 +66,7 @@ class DefaultController extends Controller
             $em->persist($post);
             $em->flush();
 
-            return $this->redirectToRoute('task_success');
+            return $this->redirectToRoute('blog_homepage');
         }
 
         return $this->render('@Blog/Default/index.html.twig', [
@@ -115,10 +82,10 @@ class DefaultController extends Controller
      */
     public function expAction()
     {
-        $roles = [['ROLE_ADMIN',], ['ROLE_USER',],];
-        $r = array_rand($roles, 1);
-        print_r($roles[$r]);
+        $post = $this->getDoctrine()->getRepository(Post::class)->find(12);
+        var_dump($post->getSlug());
 
+        //echo $post->getSlug();
         return new Response('<html><body>exp</body></html>');
 
     }

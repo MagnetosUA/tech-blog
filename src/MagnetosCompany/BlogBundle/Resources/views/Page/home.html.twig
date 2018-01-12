@@ -1,22 +1,13 @@
 {% extends '@Blog/base.html.twig' %}
 
-    {% block content_column %}
+    {% block article %}
         <!-- Post Content Column -->
 
         <div class="col-lg-8" style="margin-top: 50px;">
 
-        <h1>
-            Welcome
-            {{ app.user ? app.user.name : 'Aquanauts' }}!
-        </h1>
-            <div class="count">
-                {{ pagination.getTotalItemCount }}
-            </div>
-            <table>
-
-            </table>
-            {# display navigation #}
-
+        <h4>
+            {{ wo_render_breadcrumbs() }}
+        </h4>
             <!-- Title -->
             {% for article in pagination %}
             <h1 class="mt-4">{{ article.title }}</h1>
@@ -24,7 +15,7 @@
             <!-- Author -->
             <p class="lead">
                 by
-                <a href="#">Start Bootstrap</a>
+                {{ app.user ? app.user.name : 'Aquanauts' }}!
             </p>
 
             <hr>
@@ -62,5 +53,5 @@
                 </div>
             </div>
         </div>
-    {% endblock content_column %}
+    {% endblock article %}
 
