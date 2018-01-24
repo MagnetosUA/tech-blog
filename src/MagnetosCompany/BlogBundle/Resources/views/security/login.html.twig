@@ -3,19 +3,25 @@
 {% block main_content %}
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <h1>Login!</h1>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <h2>Введите свои данные</h2>
                 {% if error %}
                     <div class="alert alert-danger">
                         {{ error.messageKey|trans(error.messageData, 'security') }}
                     </div>
                 {% endif %}
                 {{ form_start(form) }}
-                    {{ form_row(form._username) }}
-                    {{ form_row(form._password) }}
-                    <button type="submit" class="btn btn-success">Login <span class="fa fa-lock"></span></button>
+                    {{ form_row(form._username, {
+                        'label': 'Почта'
+                    }) }}
+                    {{ form_row(form._password, {
+                        'label': 'Пароль'
+                    }) }}
+                    <button type="submit" class="btn btn-success">Войти <span class="fa fa-lock"></span></button>
                 {{ form_end(form) }}
             </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 {% endblock main_content %}
