@@ -52,7 +52,7 @@ class PostFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         for ($i = 0; $i < 5; $i++) {
-            $user = $this->getReference('user'.$i);
+            $user = $this->getReference('user'.rand(0, 3));
             $category = $this->getReference('category'.$i);
             $tag = $this->getReference('tag'.$i);
             $post = new Post();
