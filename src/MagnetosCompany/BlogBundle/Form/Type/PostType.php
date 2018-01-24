@@ -19,20 +19,30 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('article', TextareaType::class)
-            ->add('link_to_image', TextType::class)
+            ->add('title', TextType::class, [
+                'label' => 'Заголовок'
+            ])
+            ->add('article', TextareaType::class, [
+                'label' => 'Статья'
+            ])
+            ->add('link_to_image', TextType::class, [
+                'label' => 'Адрес картинки'
+            ])
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => false,
+                'label' => 'Категория'
             ])
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
                 'choice_label' => 'name',
                 'multiple' => false,
+                'label' => 'Тег'
             ])
-            ->add('save', SubmitType::class, array('label' => 'Add new Post'))
+            ->add('save', SubmitType::class, [
+                'label' => 'Добавить'
+            ])
             ->getForm();
     }
 

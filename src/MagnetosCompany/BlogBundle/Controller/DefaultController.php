@@ -32,6 +32,7 @@ class DefaultController extends Controller
         $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
 
+
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
         $breadcrumbs->addItem("Post", $this->get("router")->generate("blog_homepage"));
@@ -42,7 +43,7 @@ class DefaultController extends Controller
         $request->query->getInt('page', 1)/*page number*/,
         5/*limit per page*/
     );
-        //var_dump($pagination);
+
         return $this->render('@Blog/Page/home.html.twig', [
             'post' => $post,
             'pagination' => $pagination,
@@ -73,7 +74,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute('blog_homepage');
         }
 
-        return $this->render('@Blog/Default/index.html.twig', [
+        return $this->render('@Blog/Page/add_post.html.twig', [
             'form' => $form->createView(),
             'who_is_it' => 'post',
         ]);

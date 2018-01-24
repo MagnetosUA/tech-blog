@@ -7,12 +7,17 @@
             <div class="col-md-8" >
                 <h2>Регистрация</h2>
                 {{ form_start(form) }}
-                    {{ form_row(form.email) }}
+                    {{ form_row(form.name, {
+                        'label': 'Имя'
+                    }) }}
+                    {{ form_row(form.email, {
+                        'label': 'Почта'
+                    }) }}
                     {{ form_row(form.plainPassword.first, {
-                        'label': 'Password'
+                        'label': 'Пароль'
                     }) }}
                     {{ form_row(form.plainPassword.second, {
-                        'label': 'Repeat Password'
+                        'label': 'Повторите Пароль'
                     }) }}
                     <button type="submit" class="btn btn-primary" formnovalidate>Зарегистрироваться</button>
                 {{ form_end(form) }}

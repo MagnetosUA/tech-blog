@@ -25,7 +25,7 @@ class UserController extends Controller
             return $this->redirectToRoute('blog_homepage');
         }
 
-        return $this->render('@Blog/Default/register.html.twig', [
+        return $this->render('@Blog/Page/register.html.twig', [
             'form' => $form->createView()
         ]);
     }
