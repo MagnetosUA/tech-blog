@@ -32,26 +32,26 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('blog_homepage') }}">Home
+                    <a class="nav-link" href="{{ path('blog_homepage') }}">Главная
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('blog_register') }}">Registration</a>
+                    <a class="nav-link" href="{{ path('blog_register') }}">Регистрация</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('blog_add_post') }}">Add Post</a>
+                    <a class="nav-link" href="{{ path('blog_add_post') }}">Добавить статью</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="#">Контакты</a>
                 </li>
-                {% if is_granted('ROLE_USER') %}
+                {% if 1 < 0 %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('blog_logout') }}">Logout</a>
+                    <a class="nav-link" href="{{ path('blog_logout') }}">Выйти</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('blog_login') }}">Login</a>
+                    <a class="nav-link" href="{{ path('blog_login') }}">Войти</a>
                 </li>
                 {% endif %}
 
@@ -73,7 +73,69 @@
 
         <!-- Sidebar Widgets Column -->
         {% block sidebar %}
+            <div class="col-md-4">
 
+                <!-- Search Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Поиск</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">Go!</button>
+                </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Категории</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    {% for category in categories %}
+                                        <li>
+                                            <a href="{{ path('blog_category', {'id': category.id}) }}">{{ category.getName }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Теги</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-unstyled mb-0">
+                                    {% for tag in tags %}
+                                        <li>
+                                            <a href="{{ path('blog_tag', {'id': tag.id}) }}">{{ tag.getName }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Новость дня</h5>
+                    <div class="card-body">
+                        You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                    </div>
+                </div>
+
+            </div>
         {% endblock sidebar %}
 
     </div>
@@ -81,19 +143,18 @@
 
 </div>
 {% endblock main_content %}
+
+
 <!-- /.container -->
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Tech-Blog 2018</p>
     </div>
     <!-- /.container -->
 </footer>
 
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

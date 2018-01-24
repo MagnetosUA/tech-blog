@@ -10,11 +10,13 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class CategoryFixtures extends Fixture
 {
+    private $categories = ['Космос', 'Медицина', 'Транспорт', 'Электроника', 'Нанотехнологии'];
+
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < count($this->categories); $i++) {
             $category = new Category();
-            $category->setName('Category'.$i);
+            $category->setName($this->categories[$i]);
             $manager->persist($category);
             $this->addReference('category'.$i, $category);
         }

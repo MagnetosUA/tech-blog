@@ -2,7 +2,9 @@
 
 namespace MagnetosCompany\BlogBundle\Repository;
 
+use MagnetosCompany\BlogBundle\Entity\Category;
 use MagnetosCompany\BlogBundle\Entity\Tag;
+use MagnetosCompany\BlogBundle\Entity\Post;
 
 /**
  * PostRepository
@@ -19,6 +21,41 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->setMaxResults(1)
             ->getQuery();
 
-        return $query->getResult();
+        return $query;
     }
+
+    public function findByFirstId()
+    {
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery();
+
+        return $query;
+    }
+
+    public function findByCategory($id)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.categories = :cat')
+            ->setParameter('cat', $id)
+            ->getQuery();
+
+        return $query;
+    }
+
+    public function findByTag($id)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->leftJoin('p.tags', 'tg')
+            ->where('tg.id = :tag')
+            ->setParameter('tag', $id)
+            ->getQuery();
+
+        return $query;
+    }
+
 }
+
+
+

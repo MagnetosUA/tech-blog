@@ -1,23 +1,16 @@
 {% extends '@Blog/base.html.twig' %}
-
-    {% block article %}
-        <!-- Post Content Column -->
+{% block article %}
+    {% for article in articles %}
+      <!-- Post Content Column -->
 
         <div class="col-lg-8" style="margin-top: 50px;">
-
-        <h4>
+            <h4>
             {{ wo_render_breadcrumbs() }}
-        </h4>
+            </h4>
+
             <!-- Title -->
-            {% for article in pagination %}
-                <h1 class="mt-4"><a href="{{ path('blog_homepage', {'id':article.id}) }}">{{ article.title }}</a></h1>
-
+                <h1 class="mt-4">{{ article.title }}</h1>
             <!-- Author -->
-            <p class="lead">
-                by
-                {{ app.user ? app.user.name : 'Aquanauts' }}!
-            </p>
-
             <hr>
 
             <!-- Date/Time -->
@@ -36,23 +29,18 @@
             </p>
 
             <hr>
-            {% endfor %}
-            <div class="navigation">
-                {{ knp_pagination_render(pagination) }}
-            </div>
             <!-- Comments Form -->
             <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
+                <h5 class="card-header">Оставить комментарий</h5>
                 <div class="card-body">
                     <form>
                         <div class="form-group">
                             <textarea class="form-control" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Комментировать</button>
                     </form>
                 </div>
             </div>
         </div>
-    {% endblock article %}
-
-
+    {% endfor %}
+{% endblock article %}

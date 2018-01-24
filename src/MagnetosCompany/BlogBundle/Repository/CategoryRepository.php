@@ -10,4 +10,13 @@ namespace MagnetosCompany\BlogBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findPosts()
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.categories = :cat')
+            ->setParameter('cat', '37')
+            ->getQuery();
+
+        return $query;
+    }
 }

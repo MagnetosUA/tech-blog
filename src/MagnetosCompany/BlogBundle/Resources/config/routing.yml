@@ -16,8 +16,8 @@ blog_logout:
 
 
 blog_exp:
-    path:     /exp
-    defaults: { _controller: BlogBundle:Default:exp }
+    path:     /exp/{id}
+    defaults: { _controller: BlogBundle:Default:exp, id: 1 }
 
 blog_register:
     path:     /register
@@ -30,4 +30,16 @@ blog_add_post:
 task_success:
     path:     /success
     defaults: { _controller: BlogBundle:Default:success}
+
+blog_article:
+    path:    /article/{id}
+    defaults: {_controller: BlogBundle:Default:article, id:1}
+
+blog_category:
+    path:    /category/{id}
+    defaults: {_controller: BlogBundle:Default:category, id:1}
+
+blog_tag:
+    path:    /tag/{id}
+    defaults: {_controller: BlogBundle:Default:tag, id:1}
 
