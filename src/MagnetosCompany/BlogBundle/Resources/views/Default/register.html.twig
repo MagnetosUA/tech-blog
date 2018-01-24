@@ -2,9 +2,10 @@
 
 {% block main_content %}
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1>Register!</h1>
+        <div class="row" style="height: 600px;">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" >
+                <h2>Регистрация</h2>
                 {{ form_start(form) }}
                     {{ form_row(form.email) }}
                     {{ form_row(form.plainPassword.first, {
@@ -13,9 +14,10 @@
                     {{ form_row(form.plainPassword.second, {
                         'label': 'Repeat Password'
                     }) }}
-                    <button type="submit" class="btn btn-primary" formnovalidate>Register</button>
+                    <button type="submit" class="btn btn-primary" formnovalidate>Зарегистрироваться</button>
                 {{ form_end(form) }}
             </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 {% endblock main_content %}
