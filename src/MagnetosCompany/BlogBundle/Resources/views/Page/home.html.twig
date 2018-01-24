@@ -3,11 +3,8 @@
     {% block article %}
         <!-- Post Content Column -->
 
-        <div class="col-lg-8" style="margin-top: 50px;">
-
-        <h4>
-            {{ wo_render_breadcrumbs() }}
-        </h4>
+        <div class="col-lg-9">
+            <hr/>
             <!-- Title -->
             {% for article in pagination %}
                 <h1 class="mt-4"><a href="{{ path('blog_homepage', {'id':article.id}) }}">{{ article.title }}</a></h1>
@@ -30,7 +27,7 @@
             <hr>
 
             <!-- Post Content -->
-            <p class="lead">
+            <p class="lead" style="text-align: justify;">
                 {{ article.article }}
             </p>
 
