@@ -14,9 +14,6 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('bundles/blog/css/blog-post.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
@@ -24,7 +21,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="{{ path('blog_homepage')}}">Tech Blog</a>
+        <a class="navbar-brand" href="{{ path('blog_homepage')}}"><h3>Tech Blog</h3></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -68,7 +65,8 @@
     <div class="row">
         <!-- Post Content Column -->
         {% block article %}
-
+            <div class="col-md-8">
+            </div>
         {% endblock article %}
 
         <!-- Sidebar Widgets Column -->

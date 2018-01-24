@@ -1,9 +1,11 @@
 {% extends '@Blog/base.html.twig' %}
 {% block article %}
+    <div class="col-md-8">
+        {% if articles == null %}
+           <h2> Нету статтей по выбранным параметрам !</h2>
+        {% endif %}
     {% for article in articles %}
       <!-- Post Content Column -->
-
-        <div class="col-lg-8" style="margin-top: 50px;">
             <h4>
             {{ wo_render_breadcrumbs() }}
             </h4>
@@ -41,6 +43,6 @@
                     </form>
                 </div>
             </div>
-        </div>
     {% endfor %}
+    </div>
 {% endblock article %}
