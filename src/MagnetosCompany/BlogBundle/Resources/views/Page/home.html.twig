@@ -2,12 +2,15 @@
 
     {% block article %}
         <!-- Post Content Column -->
-
+        {% if articles is defined and articles == null %}
+            <h2> Нету статтей по выбранным параметрам !</h2>
+        {% endif %}
         <div class="col-lg-9">
             <hr/>
             <!-- Title -->
             {% for article in pagination %}
-                <h1 class="mt-4"><a href="{{ path('blog_homepage', {'id':article.id}) }}">{{ article.title }}</a></h1>
+                <h1 class="mt-4"><a href="{{ path('blog_article', {'id':article.id}) }}">{{ article.title }}</a></h1>
+
 
             <!-- Author -->
             <p class="lead">
@@ -32,21 +35,11 @@
             </p>
 
             <hr>
+
             {% endfor %}
+
             <div class="navigation">
                 {{ knp_pagination_render(pagination) }}
-            </div>
-            <!-- Comments Form -->
-            <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
             </div>
         </div>
     {% endblock article %}

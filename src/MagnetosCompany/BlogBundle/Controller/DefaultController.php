@@ -42,7 +42,7 @@ class DefaultController extends Controller
         $post, /* query NOT result */
         $request->query->getInt('page', 1)/*page number*/,
         5/*limit per page*/
-    );
+        );
 
         return $this->render('@Blog/Page/home.html.twig', [
             'post' => $post,
@@ -106,45 +106,74 @@ class DefaultController extends Controller
         return new Response('<html><body>Admin page!</body></html>');
     }
 
+    /**
+     * @param $id
+     * @return Response
+     */
     public function articleAction($id)
     {
         $article = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
         $breadcrumbs->addItem($article->getTitle(), $this->get("router")->generate("blog_article"));
 
         return $this->render('@Blog/Page/article.html.twig', [
             'article' => $article,
+            'categories' => $category,
+            'tags' => $tag,
         ]);
     }
 
-    public function categoryAction($id)
+    public function categoryAction(Request $request, $id)
     {
-        $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
         $article = $this->getDoctrine()->getRepository(Post::class)->findByCategory($id);
+        $articles = $article->getResult();
+       // print_r($articles[0][0]);
         $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
+        $breadcrumbs->addItem($category->getName(), $this->get("router")->generate("blog_article"));
 
-        $articles = $article->getResult();
-        return $this->render('@Blog/Page/article.html.twig', [
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+        $article, /* query NOT result */
+        $request->query->getInt('page', 1)/*page number*/,
+        5/*limit per page*/
+        );
+
+        return $this->render('@Blog/Page/home.html.twig', [
             'articles' => $articles,
-            'categories' => $category,
+            'categories' => $categories,
             'tags' => $tag,
+            'pagination' => $pagination,
         ]);
     }
 
-    public function tagAction($id)
+    public function tagAction(Request $request, $id)
     {
-        $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $article = $this->getDoctrine()->getRepository(Post::class)->findByTag($id);
-        $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
+        $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+        $article, /* query NOT result */
+        $request->query->getInt('page', 1)/*page number*/,
+        5/*limit per page*/
+        );
 
         $articles = $article->getResult();
-        return $this->render('@Blog/Page/article.html.twig', [
+        return $this->render('@Blog/Page/home.html.twig', [
             'articles' => $articles,
-            'categories' => $category,
-            'tags' => $tag,
+            'categories' => $categories,
+            'tags' => $tags,
+            'pagination' => $pagination,
         ]);
     }
 }

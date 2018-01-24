@@ -37,8 +37,8 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     public function findByCategory($id)
     {
         $query = $this->createQueryBuilder('p')
-            ->where('p.categories = :cat')
-            ->setParameter('cat', $id)
+            ->where('p.categories = :category')
+            ->setParameter('category', $id)
             ->getQuery();
 
         return $query;
