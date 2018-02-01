@@ -2,12 +2,13 @@
 
 namespace MagnetosCompany\BlogBundle\DataFixtures\ORM;
 
+use MagnetosCompany\BlogBundle\Entity\Comment;
 use MagnetosCompany\BlogBundle\Entity\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class PostFixtures extends Fixture
+class PostFixtures extends Fixture implements DependentFixtureInterface
 {
     private $imagesLinks = [
         'https://www.walldevil.com/wallpapers/a77/wallpaper-ligth-abstract-horror-wallpapers.jpg',
@@ -64,6 +65,7 @@ class PostFixtures extends Fixture
             $post->setTags($tag);
             $post->setCreated();
             $manager->persist($post);
+            $this->addReference('post'.$i, $post);
         }
 
         $manager->flush();
@@ -77,4 +79,5 @@ class PostFixtures extends Fixture
             TagFixtures::class,
         );
     }
+
 }

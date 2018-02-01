@@ -2,6 +2,7 @@
 
 namespace MagnetosCompany\BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -13,6 +14,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Post
 {
+    /**
+     * Tag constructor.
+     */
+    public function __construct() {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->created = date_create();
+        $this->comments = new ArrayCollection();
+    }
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -68,12 +78,11 @@ class Post
     private $tags;
 
     /**
-     * Tag constructor.
+     * @var
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
      */
-    public function __construct() {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->created = date_create();
-    }
+    private $comments;
+
 
     /**
      * Get id
@@ -107,6 +116,14 @@ class Post
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
     /**

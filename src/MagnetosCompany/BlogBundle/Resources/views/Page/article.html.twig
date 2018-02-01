@@ -6,7 +6,12 @@
             <!-- Title -->
                 <h1 class="mt-4">{{ article.title }}</h1>
             <!-- Author -->
-        {{ article.users.name }}
+        {% if article.users == null %}
+            <h6>Создал анонимный пользователь</h6>
+        {% endif %}
+        {% if article.users != null %}
+            Создал {{ article.users.name }}
+        {% endif %}
             <hr>
 
             <!-- Date/Time -->
@@ -26,6 +31,14 @@
 
             <hr>
             <!-- Comments Form -->
+        <p>
+            <h4>Комментарии</h4>
+        <hr>
+            {% for comment in comments %}
+                <p>{{ comment.text }}</p>
+        <hr>
+            {% endfor %}
+        </p>
             <div class="card my-4">
                 <h5 class="card-header">Оставить комментарий</h5>
                 <div class="card-body">

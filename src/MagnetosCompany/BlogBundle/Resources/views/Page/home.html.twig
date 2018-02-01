@@ -13,9 +13,12 @@
 
 
             <!-- Author -->
-            <p class="lead">
-                {{ article.users.name }}
-            </p>
+                {% if article.users == null %}
+                    <h6>Создал анонимный пользователь</h6>
+                {% endif %}
+                {% if article.users != null %}
+                    Создал {{ article.users.name }}
+                {% endif %}
 
             <hr>
 

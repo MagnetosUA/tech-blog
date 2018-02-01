@@ -3,9 +3,11 @@
 namespace MagnetosCompany\BlogBundle\Controller;
 
 use MagnetosCompany\BlogBundle\Entity\Category;
+use MagnetosCompany\BlogBundle\Entity\Comment;
 use MagnetosCompany\BlogBundle\Entity\Tag;
 use MagnetosCompany\BlogBundle\Entity\User;
 use MagnetosCompany\BlogBundle\Entity\Post;
+use MagnetosCompany\BlogBundle\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MagnetosCompany\BlogBundle\Form\Type\UserType;
@@ -112,6 +114,7 @@ class DefaultController extends Controller
      */
     public function articleAction($id)
     {
+        $comments = $this->getDoctrine()->getRepository(Comment::class)->findCommentsByArticle($id)->getResult();
         $article = $this->getDoctrine()->getRepository(Post::class)->find($id);
         $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
@@ -123,6 +126,7 @@ class DefaultController extends Controller
             'article' => $article,
             'categories' => $category,
             'tags' => $tag,
+            'comments' => $comments,
         ]);
     }
 
