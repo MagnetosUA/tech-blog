@@ -31,7 +31,6 @@ class SecurityController extends Controller
             'form' => $form->createView(),
             'error' => $error,
         ]);
-
     }
 
     public function logoutAction()

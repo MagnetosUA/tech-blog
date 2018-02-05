@@ -7,6 +7,7 @@ use MagnetosCompany\BlogBundle\Entity\Comment;
 use MagnetosCompany\BlogBundle\Entity\Tag;
 use MagnetosCompany\BlogBundle\Entity\User;
 use MagnetosCompany\BlogBundle\Entity\Post;
+use MagnetosCompany\BlogBundle\Form\Type\CommentType;
 use MagnetosCompany\BlogBundle\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,7 +67,7 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
+        if ($form->isValid())
         {
             $post = $form->getData();
             $em = $this->getDoctrine()->getManager();
@@ -112,12 +113,27 @@ class DefaultController extends Controller
      * @param $id
      * @return Response
      */
-    public function articleAction($id)
+    public function articleAction(Request $request, $id)
     {
         $comments = $this->getDoctrine()->getRepository(Comment::class)->findCommentsByArticle($id)->getResult();
         $article = $this->getDoctrine()->getRepository(Post::class)->find($id);
         $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isValid())
+        {
+            $comment = $form->getData();
+            $comment->setUser('user');
+            $comment->setArticle($article);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('blog_article', ['id' => $id]);
+        }
+
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
         $breadcrumbs->addItem($article->getTitle(), $this->get("router")->generate("blog_article"));
@@ -127,6 +143,7 @@ class DefaultController extends Controller
             'categories' => $category,
             'tags' => $tag,
             'comments' => $comments,
+            'form' => $form->createView(),
         ]);
     }
 

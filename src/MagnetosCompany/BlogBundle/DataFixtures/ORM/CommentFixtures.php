@@ -19,11 +19,11 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
 
-        for ($i = 0; $i < count($this->comments); $i++) {
+        for ($i = 0; $i < 10; $i++) {
             //$user = $this->getReference('user1');
-            $article = $this->getReference('post'.rand(0, 3));
+            $article = $this->getReference('post'.rand(0, 4));
             $comment = new Comment();
-            $comment->setText($this->comments[$i]);
+            $comment->setText($this->comments[rand(0, 2)]);
             $comment->setUser('user'.$i);
             $comment->setArticle($article);
             $manager->persist($comment);

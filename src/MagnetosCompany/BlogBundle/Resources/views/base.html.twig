@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
 </head>
 
@@ -42,7 +43,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('blog_register') }}">Регистрация</a>
                 </li>
-                {% if 1 < 0 %}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('blog_logout') }}">Выйти</a>
                 </li>
@@ -54,6 +55,7 @@
 
             </ul>
         </div>
+            {{ knp_menu_render('BlogBundle:Builder:mainMenu') }}
         {% endblock menu %}
     </div>
 </nav>

@@ -1,3 +1,15 @@
 body{
-    color:rebeccapurple;
+    #color:rebeccapurple;
+}
+.comment{
+    border: 2px inset #f6f6f6;
+    background: #f6f6f6;
+    border-radius: 10px;
+    margin-top:12px;
+}
+.comment .comment-user{
+    border-right: 1px inset #bebebe;
+}
+.form-contro{
+    background: #bd4147;
 }

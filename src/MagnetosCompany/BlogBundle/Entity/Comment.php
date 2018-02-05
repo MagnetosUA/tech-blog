@@ -2,8 +2,8 @@
 
 namespace MagnetosCompany\BlogBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Comment
@@ -46,6 +46,12 @@ class Comment
      */
     private $article;
 
+    /**
+     * @var
+     * @ORM\Column(name="created_date", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $created;
 
 
     /**
@@ -80,6 +86,22 @@ class Comment
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
     }
 
     /**

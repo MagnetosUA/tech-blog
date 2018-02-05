@@ -34,20 +34,29 @@
         <p>
             <h4>Комментарии</h4>
         <hr>
-            {% for comment in comments %}
+        {% for comment in comments %}
+        <div class="comment row">
+            <div class="comment-user col-md-2">
+                <p>{{ comment.user }}</p>
+                <div class="comment-date">
+                    {{ comment.created|date('Y.M.D') }}
+                </div>
+            </div>
+            <div class="comment-text col-md-10">
                 <p>{{ comment.text }}</p>
-        <hr>
-            {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
         </p>
             <div class="card my-4">
                 <h5 class="card-header">Оставить комментарий</h5>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Комментировать</button>
-                    </form>
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-group'}}) }}
+                    <div class="form-group">
+                    {{ form_row(form.text, {'attr': {'class': 'form-control', 'rows': '3'}}) }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Комментировать</button>
+                    {{ form_end(form) }}
                 </div>
             </div>
     </div>
