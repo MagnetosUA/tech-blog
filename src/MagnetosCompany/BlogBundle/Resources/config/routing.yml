@@ -14,7 +14,6 @@ blog_logout:
     path:     /logout
     defaults: { _controller: BlogBundle:Security:logout }
 
-
 blog_exp:
     path:     /exp/{id}
     defaults: { _controller: BlogBundle:Default:exp, id: 1 }

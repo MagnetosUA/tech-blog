@@ -119,13 +119,14 @@ class DefaultController extends Controller
         $article = $this->getDoctrine()->getRepository(Post::class)->find($id);
         $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
+        $user = $this->getUser();
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isValid())
         {
             $comment = $form->getData();
-            $comment->setUser('user');
+            $comment->setUser($user->getEmail());
             $comment->setArticle($article);
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
@@ -144,6 +145,7 @@ class DefaultController extends Controller
             'tags' => $tag,
             'comments' => $comments,
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 
