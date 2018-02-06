@@ -15,6 +15,13 @@
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
+    <script>
+        function changeAuth(auth) {
+            $('auth').propertyName('Out');
+        }
+        //window.onload(changeAuth(1));
+    </script>
+
 </head>
 
 <body>
@@ -28,34 +35,19 @@
         </button>
         {% block menu %}
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('blog_homepage') }}">Главная
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('blog_add_post') }}">Добавить статью</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Контакты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('blog_register') }}">Регистрация</a>
-                </li>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('blog_logout') }}">Выйти</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('blog_login') }}">Войти</a>
-                </li>
-                {% endif %}
-
-            </ul>
-        </div>
             {{ knp_menu_render('BlogBundle:Builder:mainMenu') }}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {% set auth = 1 %}
+            <li class="nav-item">
+            <a class="nav-link" href="{{ path('blog_logout') }}">Выйти</a>
+            </li>
+            {% else %}
+                {% set auth = 0 %}
+            <li class="nav-item">
+            <a class="nav-link" href="{{ path('blog_login') }}">Войти</a>
+            </li>
+            {% endif %}
+        </div>
         {% endblock menu %}
     </div>
 </nav>

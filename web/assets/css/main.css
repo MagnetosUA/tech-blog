@@ -13,3 +13,9 @@ body{
 .form-contro{
     background: #bd4147;
 }
+.home{
+    background: #6b9311;
+}
+.home a{
+    color:white;
+}
