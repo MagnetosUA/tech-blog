@@ -120,13 +120,18 @@ class DefaultController extends Controller
         $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
         $user = $this->getUser();
+        if ($user != null) {
+            $userName =$user->getEmail();
+        } else {
+            $userName = 'Anonumous';
+        }
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isValid())
         {
             $comment = $form->getData();
-            $comment->setUser($user->getEmail());
+            $comment->setUser($userName);
             $comment->setArticle($article);
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
