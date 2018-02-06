@@ -35,7 +35,7 @@ class Builder implements ContainerAwareInterface
     $menu
         ->addChild('Войти', ['route' => 'blog_login'])
         ->setAttribute('class', 'nav-item')
-        ->setLinkAttribute('class', 'nav-link');
+        ->setLinkAttribute('class', 'nav-link auth');
 
     return $menu;
     }

@@ -15,12 +15,7 @@
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
-    <script>
-        function changeAuth(auth) {
-            $('auth').propertyName('Out');
-        }
-        //window.onload(changeAuth(1));
-    </script>
+    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
 
 </head>
 
@@ -35,18 +30,25 @@
         </button>
         {% block menu %}
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            {{ knp_menu_render('BlogBundle:Builder:mainMenu') }}
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 {% set auth = 1 %}
-            <li class="nav-item">
-            <a class="nav-link" href="{{ path('blog_logout') }}">Выйти</a>
-            </li>
             {% else %}
                 {% set auth = 0 %}
-            <li class="nav-item">
-            <a class="nav-link" href="{{ path('blog_login') }}">Войти</a>
-            </li>
             {% endif %}
+            {{ knp_menu_render('BlogBundle:Builder:mainMenu') }}
+            <script>
+                var auth = {{ auth }};
+                function isAuth(auth) {
+                    if(auth==1){
+                        $(".auth").text("Выйти");
+                        $(".auth").attr("href", "{{ path('blog_logout') }}");
+                    } else{
+                        $(".auth").text("Войти");
+                        $(".auth").attr("href", "{{ path('blog_login') }}");
+                    }
+                }
+               isAuth(auth);
+            </script>
         </div>
         {% endblock menu %}
     </div>
