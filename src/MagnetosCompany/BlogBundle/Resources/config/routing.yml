@@ -15,8 +15,8 @@ blog_logout:
     defaults: { _controller: BlogBundle:Security:logout }
 
 blog_exp:
-    path:     /exp/{id}
-    defaults: { _controller: BlogBundle:Default:exp, id: 1 }
+    path:     /{_locale}/exp
+    defaults: { _controller: BlogBundle:Default:exp }
 
 blog_register:
     path:     /register

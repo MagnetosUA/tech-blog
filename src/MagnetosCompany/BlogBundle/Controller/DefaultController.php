@@ -87,15 +87,14 @@ class DefaultController extends Controller
      * @return Response
      *
      */
-    public function expAction($id)
+    public function expAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository(Post::class)->findByCategory($id);
+        $request->setLocale('uk');
+        //$translated = $this->get('translator')->trans('Этот текст должен отображаться на языке пользователя');
+        //$locale = $request->getLocale();
+        //print_r($locale);
 
-        $products = $repository->getResult();
-        return $this->render('@Blog/Default/exp.html.twig', [
-            'post' => $products,
-        ]);
+        return $this->render('@Blog/Default/exp.html.twig');
 
     }
 
@@ -123,7 +122,7 @@ class DefaultController extends Controller
         if ($user != null) {
             $userName =$user->getEmail();
         } else {
-            $userName = 'Anonumous';
+            $userName = 'Anonymous';
         }
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
