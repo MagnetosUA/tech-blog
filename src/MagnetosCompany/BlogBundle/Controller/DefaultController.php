@@ -47,11 +47,24 @@ class DefaultController extends Controller
         5/*limit per page*/
         );
 
+        $user = $this->getUser();
+        if ($user == null) {
+            $user = 'Anonymous';
+        } else {
+            $user = $user->getName();
+        }
+        $welcome = $this->get('translator')->trans(
+            'Привет %user%',
+            [
+                '%user%' => $user,
+            ]);
+
         return $this->render('@Blog/Page/home.html.twig', [
             'post' => $post,
             'pagination' => $pagination,
             'categories' => $category,
             'tags' => $tag,
+            'welcome' => $welcome,
         ]);
     }
 

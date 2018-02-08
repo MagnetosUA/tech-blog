@@ -1,6 +1,7 @@
 {% extends '@Blog/base.html.twig' %}
 
     {% block article %}
+        <span style="margin-left:20%; color:#ff7e4b; ">{{ welcome }}</span>
         <!-- Post Content Column -->
         {% if articles is defined and articles == null %}
             <h2> Нету статтей по выбранным параметрам !</h2>
