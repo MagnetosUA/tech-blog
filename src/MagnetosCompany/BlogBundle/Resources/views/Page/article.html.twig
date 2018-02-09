@@ -35,13 +35,13 @@
         <hr>
         {% for comment in comments %}
         <div class="comment row">
-            <div class="comment-user col-md-2">
+            <div class="comment-user col-md-4">
                 <p>{{ comment.user }}</p>
                 <div class="comment-date">
                     {{ comment.created|date('Y.M.D') }}
                 </div>
             </div>
-            <div class="comment-text col-md-10">
+            <div class="comment-text col-md-8">
                 <p>{{ comment.text }}</p>
             </div>
         </div>
