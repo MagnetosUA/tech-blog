@@ -44,7 +44,7 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
         $post, /* query NOT result */
         $request->query->getInt('page', 1)/*page number*/,
-        5/*limit per page*/
+        2/*limit per page*/
         );
 
         $user = $this->getUser();

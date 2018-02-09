@@ -1,6 +1,8 @@
 blog_homepage:
-    path:     /
-    defaults: { _controller: BlogBundle:Default:index }
+    path:     /{_locale}
+    defaults: { _controller: BlogBundle:Default:index, _locale: ru }
+    requirements:
+        _locale: uk|en|ru
 
 blog_admin:
     path:     /admin
@@ -31,8 +33,10 @@ task_success:
     defaults: { _controller: BlogBundle:Default:success}
 
 blog_article:
-    path:    /article/{id}
-    defaults: {_controller: BlogBundle:Default:article, id:1}
+    path:     /{_locale}/article/{id}
+    defaults: {_controller: BlogBundle:Default:article, id: 1 }
+    requirements:
+            _locale: uk|en|ru
 
 blog_category:
     path:    /category/{id}

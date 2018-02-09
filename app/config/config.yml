@@ -33,7 +33,7 @@ framework:
     templating:
         engines: ['twig']
 
-    translator: { fallbacks: [en] }
+    translator: { fallbacks: [ru] }
 
 # Twig Configuration
 twig:

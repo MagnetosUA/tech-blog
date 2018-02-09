@@ -25,10 +25,6 @@ class Builder implements ContainerAwareInterface
         ->setAttribute('class', 'nav-item')
         ->setLinkAttribute('class', 'nav-link');
     $menu
-        ->addChild('Контакты', ['route' => 'blog_admin'])
-        ->setAttribute('class', 'nav-item')
-        ->setLinkAttribute('class', 'nav-link');
-    $menu
         ->addChild('Регистрация', ['route' => 'blog_register'])
         ->setAttribute('class', 'nav-item')
         ->setLinkAttribute('class', 'nav-link');
