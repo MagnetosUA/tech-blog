@@ -54,7 +54,7 @@ class DefaultController extends Controller
             $user = $user->getName();
         }
         $welcome = $this->get('translator')->trans(
-            'Привет %user%',
+            'Hello %user%',
             [
                 '%user%' => $user,
             ]);

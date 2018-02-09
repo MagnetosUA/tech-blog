@@ -15,21 +15,21 @@ class Builder implements ContainerAwareInterface
     $menu = $factory->createItem('root');
 
     $menu
-        ->addChild('Главная', ['route' => 'blog_homepage'])
+        ->addChild('Main', ['route' => 'blog_homepage'])
         ->setAttribute('class', 'nav-item active')
         ->setLinkAttribute('class', 'nav-link');
 
     $menu->setChildrenAttribute('class', 'navbar-nav ml-auto');
     $menu
-        ->addChild('Добавить статью', ['route' => 'blog_add_post'])
+        ->addChild('Add Post', ['route' => 'blog_add_post'])
         ->setAttribute('class', 'nav-item')
         ->setLinkAttribute('class', 'nav-link');
     $menu
-        ->addChild('Регистрация', ['route' => 'blog_register'])
+        ->addChild('Sign up', ['route' => 'blog_register'])
         ->setAttribute('class', 'nav-item')
         ->setLinkAttribute('class', 'nav-link');
     $menu
-        ->addChild('Войти', ['route' => 'blog_login'])
+        ->addChild('Sign out', ['route' => 'blog_login'])
         ->setAttribute('class', 'nav-item')
         ->setLinkAttribute('class', 'nav-link auth');
 

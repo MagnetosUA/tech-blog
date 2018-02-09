@@ -41,10 +41,10 @@
                 var auth = {{ auth }};
                 function isAuth(auth) {
                     if(auth==1){
-                        $(".auth").text("Выйти");
+                        $(".auth").text("Sign in");
                         $(".auth").attr("href", "{{ path('blog_logout') }}");
                     } else{
-                        $(".auth").text("Войти");
+                        $(".auth").text("Sign out");
                         $(".auth").attr("href", "{{ path('blog_login') }}");
                     }
                 }
@@ -79,7 +79,7 @@
 
                 <!-- Search Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">{{ 'Поиск'|trans }}</h5>
+                    <h5 class="card-header">{{ 'Search'|trans }}</h5>
                     <div class="card-body">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for...">
@@ -92,7 +92,7 @@
 
                 <!-- Categories Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">{{ 'Категории'|trans }}</h5>
+                    <h5 class="card-header">{{ 'Categories'|trans }}</h5>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -110,7 +110,7 @@
 
                 <!-- Tags Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">{{ 'Теги'|trans }}</h5>
+                    <h5 class="card-header">{{ 'Tags'|trans }}</h5>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -128,7 +128,7 @@
 
                 <!-- Side Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">{{ 'Новость дня'|trans }}</h5>
+                    <h5 class="card-header">{{ 'News of the day'|trans }}</h5>
                     <div class="card-body">
                         You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
                     </div>
