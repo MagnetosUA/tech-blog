@@ -9,11 +9,12 @@ use MagnetosCompany\BlogBundle\Entity\User;
 
 class UserController extends Controller
 {
+
     public function registerAction(Request $request)
     {
         $form = $this->createForm(UserRegistrationType::class);
         $form->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
             $em = $this->getDoctrine()->getManager();
@@ -29,4 +30,5 @@ class UserController extends Controller
             'form' => $form->createView()
         ]);
     }
+
 }

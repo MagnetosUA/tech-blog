@@ -1,17 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aleks
- * Date: 06.01.18
- * Time: 14:02
- */
 
 namespace MagnetosCompany\BlogBundle\Controller;
 
 use MagnetosCompany\BlogBundle\Form\Type\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
 
 class SecurityController extends Controller
 {
@@ -39,3 +31,4 @@ class SecurityController extends Controller
     }
 
 }
+

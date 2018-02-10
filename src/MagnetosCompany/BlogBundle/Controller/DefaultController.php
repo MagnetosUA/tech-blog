@@ -215,4 +215,6 @@ class DefaultController extends Controller
             'pagination' => $pagination,
         ]);
     }
+
 }
+
