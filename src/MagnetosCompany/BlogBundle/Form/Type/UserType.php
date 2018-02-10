@@ -17,8 +17,8 @@ class UserType extends AbstractType
             ->add('name', TextType::class)
             ->add('password', TextType::class)
             ->add('email', EmailType::class)
-            ->add('save', SubmitType::class, array('label' => 'Add User'))
-            ->getForm();
+            ->add('save', SubmitType::class, array('label' => 'Add User'));
     }
 
 }
+

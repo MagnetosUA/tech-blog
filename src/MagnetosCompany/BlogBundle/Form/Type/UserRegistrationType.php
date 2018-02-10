@@ -11,8 +11,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use MagnetosCompany\BlogBundle\Entity\User;
 
-class UserRegistrationForm extends AbstractType
+class UserRegistrationType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -35,4 +36,6 @@ class UserRegistrationForm extends AbstractType
     {
         return 'blog_bundle_user_registration_form';
     }
+
 }
+

@@ -11,7 +11,7 @@ namespace MagnetosCompany\BlogBundle\Security;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use MagnetosCompany\BlogBundle\BlogBundle;
-use MagnetosCompany\BlogBundle\Form\Type\LoginForm;
+use MagnetosCompany\BlogBundle\Form\Type\LoginType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,7 +50,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return;
         }
 
-        $form = $this->formFactory->create(LoginForm::class);
+        $form = $this->formFactory->create(LoginType::class);
         $form->handleRequest($request);
         $data = $form->getData();
         $request->getSession()->set(

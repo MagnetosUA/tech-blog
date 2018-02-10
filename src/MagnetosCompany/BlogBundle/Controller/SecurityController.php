@@ -8,7 +8,7 @@
 
 namespace MagnetosCompany\BlogBundle\Controller;
 
-use MagnetosCompany\BlogBundle\Form\Type\LoginForm;
+use MagnetosCompany\BlogBundle\Form\Type\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -23,7 +23,7 @@ class SecurityController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        $form = $this->createForm(LoginForm::class, [
+        $form = $this->createForm(LoginType::class, [
             '_username' => $lastUsername,
         ]);
 
