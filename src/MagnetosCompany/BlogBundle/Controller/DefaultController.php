@@ -5,13 +5,10 @@ namespace MagnetosCompany\BlogBundle\Controller;
 use MagnetosCompany\BlogBundle\Entity\Category;
 use MagnetosCompany\BlogBundle\Entity\Comment;
 use MagnetosCompany\BlogBundle\Entity\Tag;
-use MagnetosCompany\BlogBundle\Entity\User;
 use MagnetosCompany\BlogBundle\Entity\Post;
 use MagnetosCompany\BlogBundle\Form\Type\CommentType;
-use MagnetosCompany\BlogBundle\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use MagnetosCompany\BlogBundle\Form\Type\UserType;
 use MagnetosCompany\BlogBundle\Form\Type\PostType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -27,6 +24,7 @@ class DefaultController extends Controller
 {
 
     /**
+     * @param Request $request
      * @return Response
      */
     public function indexAction(Request $request)
@@ -45,9 +43,9 @@ class DefaultController extends Controller
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-        $post, /* query NOT result */
-        $request->query->getInt('page', 1)/*page number*/,
-        2/*limit per page*/
+            $post, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            2/*limit per page*/
         );
 
         $user = $this->getUser();
@@ -84,7 +82,7 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $post = $form->getData();
             $em = $this->getDoctrine()->getManager();
@@ -107,9 +105,6 @@ class DefaultController extends Controller
     public function expAction(Request $request)
     {
         $request->setLocale('uk');
-        //$translated = $this->get('translator')->trans('Этот текст должен отображаться на языке пользователя');
-        //$locale = $request->getLocale();
-        //print_r($locale);
 
         return $this->render('@Blog/Default/exp.html.twig');
 
@@ -144,7 +139,7 @@ class DefaultController extends Controller
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-        if ($form->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $comment = $form->getData();
             $comment->setUser($userName);
@@ -176,7 +171,6 @@ class DefaultController extends Controller
         $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
         $article = $this->getDoctrine()->getRepository(Post::class)->findByCategory($id);
         $articles = $article->getResult();
-       // print_r($articles[0][0]);
         $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("blog_homepage"));
@@ -184,9 +178,9 @@ class DefaultController extends Controller
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-        $article, /* query NOT result */
-        $request->query->getInt('page', 1)/*page number*/,
-        5/*limit per page*/
+            $article, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
         );
 
         return $this->render('@Blog/Page/home.html.twig', [
@@ -207,12 +201,13 @@ class DefaultController extends Controller
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-        $article, /* query NOT result */
-        $request->query->getInt('page', 1)/*page number*/,
-        5/*limit per page*/
+            $article, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
         );
 
         $articles = $article->getResult();
+
         return $this->render('@Blog/Page/home.html.twig', [
             'articles' => $articles,
             'categories' => $categories,
