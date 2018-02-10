@@ -31,6 +31,9 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $messageGenerator = $this->container->get('MessageGenerator');
+        $message = $messageGenerator->getRandomMessage();
+
         $post = $this->getDoctrine()->getRepository(Post::class)->findAll();
         $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $tag = $this->getDoctrine()->getRepository(Tag::class)->findAll();
@@ -60,6 +63,7 @@ class DefaultController extends Controller
             ]);
 
         return $this->render('@Blog/Page/home.html.twig', [
+            'message' => $message,
             'post' => $post,
             'pagination' => $pagination,
             'categories' => $category,

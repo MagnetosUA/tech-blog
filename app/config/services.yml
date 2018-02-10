@@ -26,7 +26,9 @@ services:
             tags:
                 - { name: doctrine.event_subscriber }
 
-
+    MessageGenerator:
+        class: MagnetosCompany\BlogBundle\Service\MessageGenerator
+        public: true
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
