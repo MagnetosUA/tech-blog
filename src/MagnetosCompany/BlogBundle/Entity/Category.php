@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

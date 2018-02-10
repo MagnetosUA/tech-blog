@@ -15,7 +15,6 @@ class Comment
 {
 
     /**
-     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -24,21 +23,18 @@ class Comment
     private $id;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="text", type="string", length=255)
      */
     private $text;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="user", type="string", length=255)
      */
     private $user;
 
     /**
-     * @var string
      *
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
      * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
@@ -47,7 +43,7 @@ class Comment
     private $article;
 
     /**
-     * @var
+     *
      * @ORM\Column(name="created_date", type="datetime")
      * @Gedmo\Timestampable(on="create")
      */

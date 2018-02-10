@@ -26,11 +26,11 @@ class User implements UserInterface
     /**
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      * @Assert\NotBlank()
-     * * @Assert\Length(
+     * @Assert\Length(
      *      min = 2,
-     *      max = 10,
+     *      max = 20,
      *      minMessage = "Your first name must be at least 2 characters long",
-     *      maxMessage = "Your first name cannot be longer than 10 characters"
+     *      maxMessage = "Your first name cannot be longer than 20 characters"
      * )
      */
     private $name;
@@ -42,6 +42,13 @@ class User implements UserInterface
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 20,
+     *      minMessage = "Your password must be at least 3 characters long",
+     *      maxMessage = "Your password cannot be longer than 20 characters"
+     * )
      */
     private $plainPassword;
 
@@ -93,9 +100,6 @@ class User implements UserInterface
     {
         $roles = $this->roles;
 
-//        if (!in_array('ROLE_USER', $roles)) {
-//            $roles[] = 'ROLE_USER';
-//        }
         return $roles;
     }
 
@@ -103,14 +107,6 @@ class User implements UserInterface
     {
         $this->roles = $roles;
     }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return User
-     */
 
     /**
      * @Assert\IsTrue(message="The password cannot match your first name")

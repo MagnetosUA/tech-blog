@@ -31,7 +31,7 @@
         </button>
         {% block menu %}
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% set auth = 1 %}
             {% else %}
                 {% set auth = 0 %}
@@ -41,10 +41,10 @@
                 var auth = {{ auth }};
                 function isAuth(auth) {
                     if(auth==1){
-                        $(".auth").text("Sign in");
+                        $(".auth").text("Sign out");
                         $(".auth").attr("href", "{{ path('blog_logout') }}");
                     } else{
-                        $(".auth").text("Sign out");
+                        $(".auth").text("Sign in");
                         $(".auth").attr("href", "{{ path('blog_login') }}");
                     }
                 }

@@ -5,7 +5,7 @@ namespace MagnetosCompany\BlogBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Post
  *
@@ -14,14 +14,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Post
 {
-    /**
-     * Tag constructor.
-     */
-    public function __construct() {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->created = date_create();
-        $this->comments = new ArrayCollection();
-    }
 
     /**
      * @ORM\Column(name="id", type="integer")
@@ -31,12 +23,20 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(name="title", type="string", length=255, unique=true)
+     * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Your title must be at least 2 characters long",
+     *      maxMessage = "Your title cannot be longer than 255 characters"
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(name="article", type="text")
+     * @Assert\NotBlank()
      */
     private $article;
 
@@ -83,6 +83,15 @@ class Post
      */
     private $comments;
 
+    /**
+     * Tag constructor.
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->created = date_create();
+        $this->comments = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -233,6 +242,16 @@ class Post
     }
 
     /**
+     * Get categories
+     *
+     * @return \MagnetosCompany\BlogBundle\Entity\Category
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
      * @return mixed
      */
     public function getTags()
@@ -248,14 +267,5 @@ class Post
         $this->tags[] = $tags;
     }
 
-
-    /**
-     * Get categories
-     *
-     * @return \MagnetosCompany\BlogBundle\Entity\Category
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
 }
+

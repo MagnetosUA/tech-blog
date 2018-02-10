@@ -58,9 +58,5 @@ class Tag
         return $this->name;
     }
 
-    /**
-     * Get posts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
 }
+
