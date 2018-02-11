@@ -85,6 +85,8 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid())
         {
             $post = $form->getData();
+            $user = $this->getUser();
+            $post->setUsers($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
