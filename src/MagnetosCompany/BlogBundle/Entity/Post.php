@@ -262,7 +262,7 @@ class Post
     /**
      * @param mixed $tags
      */
-    public function setTags($tags)
+    public function setTags($tags = null)
     {
         $this->tags[] = $tags;
     }
