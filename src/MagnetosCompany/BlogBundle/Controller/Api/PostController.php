@@ -38,4 +38,19 @@ class PostController extends Controller
         return $response;
 
     }
+
+    /**
+     * @Route("/api/posts/{title}")
+     * @Method("GET")
+     */
+    public function showAction($title)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->findOneBy(['title' => $title]);
+        $data = [
+            'title' => $post->getTitle(),
+            'article' => $post->getArticle(),
+            'linkToImage' => $post->getLinkToImage(),
+        ];
+        return new Response(json_encode($data), 200);
+    }
 }
