@@ -36,6 +36,14 @@ $data = [
 $response = $client->post('/api/posts', [
     'body' => json_encode($data)
 ]);
+echo $response;
+echo "\n\n";die;
+$title = 'Title';
+//$response = $client->get('/api/posts/'.$title);
+$response = $client->get('/api/posts');
+//$response = $client->get($postUrl);
+
+
 
 echo $response->getStatusCode();
 echo $response->getBody();
