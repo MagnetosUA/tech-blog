@@ -9,9 +9,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class PostController extends Controller
 {
+
     /**
      * @Route("/api/posts")
      * @Method("POST")
@@ -53,6 +58,14 @@ class PostController extends Controller
      */
     public function showAction($title)
     {
+        $normalizer = new ObjectNormalizer();
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers, $encoders);
         $post = $this->getDoctrine()->getRepository(Post::class)->findOneBy(['title' => $title]);
         if (!$post) {
             throw $this->createNotFoundException(sprintf(
@@ -61,8 +74,8 @@ class PostController extends Controller
             ));
         }
 
-        $data = $this->serializePost($post);
-        $response = new Response(json_encode($data), 200);
+        $data = $serializer->serialize($post, 'json');
+        $response = new Response($data, 200);
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
