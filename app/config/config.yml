@@ -98,8 +98,6 @@ knp_paginator:
 
 white_october_breadcrumbs: ~
 
-# config/packages/sonata_admin.yaml
-
 sonata_block:
     default_contexts: [sonata_page_bundle]
     blocks:
