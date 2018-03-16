@@ -113,16 +113,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @return Response
-     *
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
-    public function adminAction()
-    {
-        return new Response('<html><body>Admin page!</body></html>');
-    }
-
-    /**
      * @param $id
      * @return Response
      */

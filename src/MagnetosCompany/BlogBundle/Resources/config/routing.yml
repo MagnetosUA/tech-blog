@@ -4,10 +4,6 @@ blog_homepage:
     requirements:
         _locale: uk|en|ru
 
-blog_admin:
-    path:     /admin
-    defaults: { _controller: BlogBundle:Default:admin }
-
 blog_login:
     path:     /login
     defaults: { _controller: BlogBundle:Security:login }

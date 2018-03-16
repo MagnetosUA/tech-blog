@@ -97,3 +97,11 @@ knp_paginator:
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
 
 white_october_breadcrumbs: ~
+
+# config/packages/sonata_admin.yaml
+
+sonata_block:
+    default_contexts: [sonata_page_bundle]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
