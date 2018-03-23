@@ -1,0 +1,10 @@
+{% extends '@Blog/base.html.twig' %}
+{% block sidebar %}
+{% endblock sidebar %}
+    {% block article %}
+        {% for i in results %}
+            <p>{{ i.title }}</p>
+        {% endfor %}
+    {% endblock article %}
+
+

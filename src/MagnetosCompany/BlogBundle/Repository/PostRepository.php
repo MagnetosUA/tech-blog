@@ -55,6 +55,15 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         return $query;
     }
 
+    public function search($word) {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.title LIKE :word')
+            ->setParameter('word', '%'.$word.'%')
+            ->getQuery();
+
+        return $query;
+    }
+
 }
 
 

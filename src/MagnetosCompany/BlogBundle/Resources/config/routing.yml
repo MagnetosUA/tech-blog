@@ -42,5 +42,9 @@ blog_tag:
     path:    /tag/{id}
     defaults: {_controller: BlogBundle:Default:tag, id:1}
 
+search_results:
+    path:    /search_results/{word}
+    defaults: {_controller: BlogBundle:Search:search}
+
 
 

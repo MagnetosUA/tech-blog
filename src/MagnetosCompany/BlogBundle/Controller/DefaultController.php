@@ -7,6 +7,7 @@ use MagnetosCompany\BlogBundle\Entity\Comment;
 use MagnetosCompany\BlogBundle\Entity\Tag;
 use MagnetosCompany\BlogBundle\Entity\Post;
 use MagnetosCompany\BlogBundle\Form\Type\CommentType;
+use MagnetosCompany\BlogBundle\Form\Type\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MagnetosCompany\BlogBundle\Form\Type\PostType;
@@ -29,6 +30,15 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $word = $data['search'];
+            //print_r($data);
+            return $this->redirectToRoute('search_results', ['word' => $word]);
+            //die;
+        }
         $messageGenerator = $this->container->get('MessageGenerator');
         $message = $messageGenerator->getRandomMessage();
 
@@ -67,6 +77,7 @@ class DefaultController extends Controller
             'categories' => $category,
             'tags' => $tag,
             'welcome' => $welcome,
+            'form' => $form->createView(),
         ]);
     }
 
