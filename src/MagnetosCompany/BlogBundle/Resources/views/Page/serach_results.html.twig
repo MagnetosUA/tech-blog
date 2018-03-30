@@ -2,9 +2,16 @@
 {% block sidebar %}
 {% endblock sidebar %}
     {% block article %}
+        <p>Результаты поиска :</p>
+        <ul>
         {% for i in results %}
-            <p>{{ i.title }}</p>
+            <li>
+                <a href="{{ path('blog_article', {'id': i.id}) }}">
+                    {{ i.title }}
+                </a>
+            </li>
         {% endfor %}
+        </ul>
     {% endblock article %}
 
 

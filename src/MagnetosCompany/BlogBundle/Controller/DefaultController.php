@@ -24,10 +24,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class DefaultController extends Controller
 {
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
     public function indexAction(Request $request)
     {
         $form = $this->createForm(SearchType::class);
@@ -35,9 +31,7 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $word = $data['search'];
-            //print_r($data);
             return $this->redirectToRoute('search_results', ['word' => $word]);
-            //die;
         }
         $messageGenerator = $this->container->get('MessageGenerator');
         $message = $messageGenerator->getRandomMessage();

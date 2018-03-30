@@ -78,20 +78,16 @@
             <div class="col-md-3">
 
                 <!-- Search Widget -->
+                {% block search %}
                 <div class="card my-4">
                     <h5 class="card-header">{{ 'Search'|trans }}</h5>
                     <div class="card-bodyj">
-                        {#<div class="input-group">#}
-                            {#<input type="text" class="form-control" placeholder="Search for...">#}
-                            {#<span class="input-group-btn">#}
-                            {#<button class="btn btn-secondary" type="button">Go!</button>#}
-                            {#</span>#}
                             {{ form_start(form) }}
                             {{ form_row(form.search, {'attr': {'placeholder': 'Search for...'}}) }}
                             {{ form_end(form) }}
-                        {#</div>#}
                     </div>
                 </div>
+                {% endblock search %}
 
                 <!-- Categories Widget -->
                 <div class="card my-4">
